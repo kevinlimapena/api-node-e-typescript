@@ -4,8 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "node ./src/index.js",
-    "start": "node ./src/index.js"
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "start": "tsx dist/index.ts"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
@@ -19,6 +20,8 @@
     "eslint": "^9.39.2",
     "globals": "^16.5.0",
     "jiti": "^2.6.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.50.1"
   },
   "packageManager": "yarn@4.12.0"
