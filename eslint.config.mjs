@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-  // JavaScript
+
   {
     files: ["**/*.{js,mjs,cjs}"],
     plugins: { js },
@@ -17,10 +17,9 @@ export default defineConfig([
     },
   },
 
-  // TypeScript (recommended)
+
   ...tseslint.configs.recommended,
 
-  // 🔥 OVERRIDE FINAL (manda em tudo)
   {
     files: ["**/*.{ts,mts,cts}"],
     rules: {
