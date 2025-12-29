@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { CidadesController } from '../controllers/index';
 
+
 const router = Router();
 
 router.get('/', (_, res) => {
@@ -8,6 +9,7 @@ router.get('/', (_, res) => {
 });
 
 router.get('/cidades', CidadesController.getAllValidation, CidadesController.getAll);
+
 router.post('/cidades', CidadesController.CreateValidation, CidadesController.create);
 router.get('/cidades/:id', CidadesController.getByIdValidation, CidadesController.getById);
 router.put('/cidades/:id', CidadesController.updateByIdValidation, CidadesController.updateById);
