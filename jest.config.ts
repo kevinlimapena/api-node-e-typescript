@@ -4,7 +4,6 @@ export default {
 
   clearMocks: true,
 
-  // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
 
 
@@ -13,7 +12,6 @@ export default {
 
   coverageProvider: 'v8',
 
-  // A list of reporter names that Jest uses when writing coverage reports
   coverageReporters: [
     'json'
   ],
@@ -22,6 +20,16 @@ export default {
     './tests/jest.setup.ts'
   ],
 
+  preset: 'ts-jest/presets/default-esm',
+
+  testEnvironment: 'node',
+
+  globals: {
+    'ts-jest': {
+      useESM: true,
+      tsconfig: 'tsconfig.json',
+    },
+  },
 
   testMatch: [
     '<rootDir>/tests/**/*.test.ts'

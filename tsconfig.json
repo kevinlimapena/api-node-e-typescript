@@ -6,7 +6,8 @@
     "outDir": "./build",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
+    "module": "commonjs",
+    "esModuleInterop": true,
     "target": "esnext",
     "types": [],
     "sourceMap": true,
