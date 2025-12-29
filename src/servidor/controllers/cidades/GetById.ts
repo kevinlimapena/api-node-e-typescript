@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import { validation } from "../../shered/middlewares/validation.js";
+import { validation } from '../../shered/middlewares/Validation.js';
 import * as yup from 'yup';
 import type { Request, Response } from "express";
 
