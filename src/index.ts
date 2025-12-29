@@ -1,4 +1,5 @@
-import { server } from "./servidor/servidor";
+import { server } from "./servidor/servidor.js";
+
 
 
 

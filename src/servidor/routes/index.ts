@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { StatusCodes } from 'http-status-codes';
+import { CidadesController } from '../controllers/index.js';
 
 const router = Router();
 
@@ -7,9 +7,8 @@ router.get('/', (_, res) => {
   res.send('Olá Dev');
 });
 
-router.post('/teste', (req, res) => {
-  //  console.log(req.body);
-  return res.status(StatusCodes.UNAUTHORIZED).json(req.body)
-});
+router.post('/cidades',
+  CidadesController.CreateValidation,
+  CidadesController.create);
 
 export { router };
