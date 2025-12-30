@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
-    "start": "node ./build/index.js",
+    "start": "tsx src/index.ts",
     "test": "jest"
   },
   "dependencies": {
