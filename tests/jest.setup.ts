@@ -1,5 +1,15 @@
-import request from "supertest";
+import supertest from 'supertest';
 import { server } from "../src/servidor/servidores";
+import { Knex } from "../src/servidor/database/knex";
 
-export const testServer = request(server);
 
+beforeAll(async () => {
+  await Knex.migrate.latest();
+});
+
+afterAll(async () => {
+  await Knex.destroy();
+});
+
+
+export const testServer = supertest(server);

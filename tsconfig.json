@@ -7,7 +7,9 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "esnext",
-    "types": [],
+    "types": [
+      "jest"
+    ],
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,

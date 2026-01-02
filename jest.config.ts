@@ -1,41 +1,26 @@
-
-
 export default {
-
   clearMocks: true,
-
   collectCoverage: true,
-
-
   coverageDirectory: 'coverage',
-
-
   coverageProvider: 'v8',
+  coverageReporters: ['json'],
 
-  coverageReporters: [
-    'json'
-  ],
+  setupFilesAfterEnv: ['./tests/jest.setup.ts'],
 
-  setupFilesAfterEnv: [
-    './tests/jest.setup.ts'
-  ],
-
-  preset: 'ts-jest/presets/default-esm',
-
-
+  // Mude para preset padrão (CommonJS)
+  preset: 'ts-jest',
 
   testEnvironment: 'node',
 
-  globals: {
-    'ts-jest': {
-      useESM: true,
-      tsconfig: 'tsconfig.json',
-    },
+  // Configuração simplificada
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
   },
 
-  testMatch: [
-    '<rootDir>/tests/**/*.test.ts'
-  ],
+  testMatch: ['<rootDir>/tests/**/*.test.ts'],
 
-
+  // Opcional: se usar paths no tsconfig
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
 };

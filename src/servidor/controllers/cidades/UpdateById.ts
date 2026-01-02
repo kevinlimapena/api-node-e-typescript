@@ -1,17 +1,17 @@
-import type { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
-import { validation } from '../../shared/middlewares/validation';
+
+import { CidadesProvider } from '../../database/providers/cidades';
+
 import { ICidade } from '../../database/models';
-
-
-
-
+import { validation } from '../../shared/middlewares';
 
 
 export interface IParamProps {
   id?: number;
 }
+
 export interface IBodyProps extends Omit<ICidade, 'id'> { }
 
 export const updateByIdValidation = validation(getSchema => ({
@@ -23,9 +23,24 @@ export const updateByIdValidation = validation(getSchema => ({
   })),
 }));
 
-export const updateById = async (req: Request<IParamProps, {}, IBodyProps>, res: Response) => {
-  console.log(req.params);
-  console.log(req.body);
 
-  return res.status(StatusCodes.CREATED).json(1);
+export const updateById = async (req: Request<IParamProps, {}, IBodyProps>, res: Response) => {
+  if (!req.params.id) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: 'O parâmetro "id" precisa ser informado.'
+      }
+    });
+  }
+
+  const result = await CidadesProvider.updateById(req.params.id, req.body);
+  if (result instanceof Error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      errors: {
+        default: result.message
+      }
+    });
+  }
+
+  return res.status(StatusCodes.NO_CONTENT).json(result);
 };

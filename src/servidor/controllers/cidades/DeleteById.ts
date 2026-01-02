@@ -1,10 +1,9 @@
-import type { Request, Response } from 'express';
+import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
 
-import { StatusCodes } from 'http-status-codes';
-import { validation } from '../../shared/middlewares/validation';
-
-
+import { CidadesProvider } from '../../database/providers/cidades';
+import { validation } from '../../shared/middlewares';
 
 
 
@@ -18,7 +17,22 @@ export const deleteByIdValidation = validation(getSchema => ({
 }));
 
 export const deleteById = async (req: Request<IParamProps>, res: Response) => {
-  console.log(req.params);
+  if (!req.params.id) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: 'O parâmetro "id" precisa ser informado.'
+      }
+    });
+  }
 
-  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Não implementado!');
+  const result = await CidadesProvider.deleteById(req.params.id);
+  if (result instanceof Error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      errors: {
+        default: result.message
+      }
+    });
+  }
+
+  return res.status(StatusCodes.NO_CONTENT).send();
 };
