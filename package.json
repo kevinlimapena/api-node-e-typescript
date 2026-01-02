@@ -1,13 +1,16 @@
 {
   "name": "api-node",
   "version": "1.0.0",
-  "type": "module",
   "private": true,
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
     "start": "tsx src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "knex:migrate": "knex --knexfile ./src/servidor/database/knex/Environment.ts migrate:latest",
+    "knex:rollback-all": "knex --knexfile ./src/servidor/database/knex/Environment.ts migrate:rollback --all",
+    "knex:rollback": "knex --knexfile ./src/servidor/database/knex/Environment.ts migrate:rollback",
+    "knex:seed": "knex --knexfile ./src/servidor/database/knex/Environment.ts seed:run"
   },
   "dependencies": {
     "@babel/preset-env": "^7.28.5",
@@ -15,7 +18,10 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "http-status-codes": "^2.3.0",
+    "knex": "^3.1.0",
     "pg": "^8.16.3",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
     "yup": "^1.7.1",
     "zod": "^4.2.1"
   },

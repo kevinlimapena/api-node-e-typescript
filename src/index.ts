@@ -1,8 +1,8 @@
 import { server } from "./servidor/servidores";
 import { con } from "./servidor/shared/envs/conexion"
-con.connect()
-  .then(() => console.log("PostgreSQL conectado"))
-  .catch(err => console.error("Erro ao conectar:", err));
+// con.connect()
+//   .then(() => console.log("PostgreSQL conectado"))
+//   .catch(err => console.error("Erro ao conectar:", err));
 
 
 server.listen(process.env.PORT, () => {
