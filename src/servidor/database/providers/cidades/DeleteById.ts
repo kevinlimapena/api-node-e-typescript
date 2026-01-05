@@ -1,5 +1,5 @@
 
-import { ETableNames } from "../../ETableNames";
+import { ETableNames } from "../../seeds/ETableNames";
 import { Knex } from "../../knex";
 
 
