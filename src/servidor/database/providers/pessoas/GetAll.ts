@@ -8,7 +8,7 @@ export const getAll = async (page: number, limit: number, filter: string,): Prom
     const result = await Knex(ETableNames.pessoa)
       .select('*')
 
-      .orWhere('nome', 'like', `%${filter}%`)
+      .orWhere('nomeCompleto', 'like', `%${filter}%`)
       .offset((page - 1) * limit)
       .limit(limit);
 

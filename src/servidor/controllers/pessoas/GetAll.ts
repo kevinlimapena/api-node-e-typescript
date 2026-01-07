@@ -2,19 +2,20 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
 
-import { CidadesProvider } from '../../database/providers/cidades';
+import { PessoasProvider } from '../../database/providers/pessoas';
+
 import { validation } from '../../shared/middlewares';
 
 // Interface mais flexível
 export interface IQueryProps {
-  id?: number | undefined;
+
   page?: number;
   limit?: number;
   filter?: string;
 }
 
 const querySchema: yup.ObjectSchema<IQueryProps> = yup.object().shape({
-  id: yup.number().optional().moreThan(0).default(1),
+
   page: yup.number().optional().moreThan(0).default(1),
   limit: yup.number().optional().default(7),
   filter: yup.string().optional().default(''),
@@ -29,10 +30,10 @@ export const getAll = async (req: Request<{}, {}, {}, IQueryProps>, res: Respons
   const page = req.query.page ?? 1;
   const limit = req.query.limit ?? 7;
   const filter = req.query.filter ?? '';
-  const id = req.query.id;
 
-  const result = await CidadesProvider.getAll(page, limit, filter, id);
-  const count = await CidadesProvider.count(filter);
+
+  const result = await PessoasProvider.getAll(page, limit, filter);
+  const count = await PessoasProvider.count(filter);
 
   if (result instanceof Error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

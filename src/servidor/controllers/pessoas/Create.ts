@@ -2,23 +2,22 @@ import type { Request, Response } from 'express';
 import * as yup from 'yup';
 import { validation } from '../../shared/middlewares/validation';
 import { StatusCodes } from 'http-status-codes';
-import { ICidade } from '../../database/models';
+import { IPessoa } from '../../database/models';
 import { Result } from 'pg';
-import { CidadesProvider } from '../../database/providers/cidades';
+import { PessoasProvider } from '../../database/providers/pessoas';
 
 
-export interface IBodyProps extends Omit<ICidade, 'id'> { }
+export interface IBodyProps extends Omit<IPessoa, 'id'> { }
 
-interface Filter {
-  filter?: string;
-}
+
 
 const bodySchema: yup.ObjectSchema<IBodyProps> = yup.object({
-  nome: yup.string().required().min(3).max(150),
+
+  email: yup.string().required().email(),
+  cidadeId: yup.number().integer().required(),
+  nomeCompleto: yup.string().required().min(3),
 });
-const querySchema: yup.ObjectSchema<Filter> = yup.object({
-  filter: yup.string().required().min(3),
-});
+
 
 export const CreateValidation = validation((getSchema) => ({
   body: getSchema<IBodyProps>(bodySchema),
@@ -28,7 +27,7 @@ export const CreateValidation = validation((getSchema) => ({
 
 export const create = async (req: Request<{}, {}, IBodyProps>, res: Response) => {
 
-  const result = await CidadesProvider.create(req.body);
+  const result = await PessoasProvider.create(req.body);
   if (result instanceof Error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(
       {

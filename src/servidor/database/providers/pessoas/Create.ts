@@ -10,7 +10,7 @@ export const create = async (pessoa: Omit<IPessoa, 'id'>): Promise<
 
   try {
     const [{ count }] = await Knex(ETableNames.cidade)
-      .where('id', '=', pessoa.ciadadeId)
+      .where('id', '=', pessoa.cidadeId)
       .count<[{ count: number }]>('* as count') as [{ count: number }];
 
     if (count == 0) {
@@ -29,6 +29,7 @@ export const create = async (pessoa: Omit<IPessoa, 'id'>): Promise<
     return new Error('Erro ao cadastrar o registro')
 
   } catch (error) {
+    console.log(error);
     return new Error('Erro ao Cadastrar o Registro');
   }
 

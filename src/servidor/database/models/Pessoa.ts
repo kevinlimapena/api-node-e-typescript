@@ -1,6 +1,6 @@
 export interface IPessoa {
   id: number;
   email: string;
-  ciadadeId: number;
+  cidadeId: number;
   nomeCompleto: string;
 }

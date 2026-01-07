@@ -4,7 +4,7 @@ import { Knex } from "../../knex";
 export const count = async (filter = ''): Promise<number | Error> => {
   try {
     const result = await Knex(ETableNames.pessoa)
-      .where('nome', 'like', `%${filter}%`)
+      .where('nomeCompleto', 'like', `%${filter}%`)
       .count<{ count: number }>('* as count')
       .first(); // Usa first() para pegar apenas um resultado
 

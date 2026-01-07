@@ -5,7 +5,7 @@ import * as create from './Create';
 import * as getAll from './GetAll';
 
 
-export const CidadesController = {
+export const PessoasController = {
   ...deleteById,
   ...updateById,
   ...getById,
