@@ -6,6 +6,7 @@ import { IUsuario } from '../../database/models';
 import { Result } from 'pg';
 import { UsuariosProvider } from '../../database/providers/usuarios';
 import { json } from 'zod';
+import { PasswordCrypto } from '../../shared/services';
 
 
 export interface IBodyProps extends Omit<IUsuario, 'id' | 'nome'> { }
@@ -41,8 +42,8 @@ export const signIn = async (req: Request<{}, {}, IBodyProps>, res: Response) =>
       }
     );
   }
-
-  if (senha !== result.senha) {
+  const passwordMatch = await PasswordCrypto.verifyPassoword(senha, result.senha);
+  if (!passwordMatch) {
     return res.status(StatusCodes.UNAUTHORIZED).json(
       {
         error: {
@@ -52,7 +53,7 @@ export const signIn = async (req: Request<{}, {}, IBodyProps>, res: Response) =>
     );
 
   } else {
-    return res.status(StatusCodes.OK).json({ accessToken: 'teste.teste.tes' })
+    return res.status(StatusCodes.OK).json({ accessToken: 'teste.teste.teste' })
   }
 
   //console.log(req.body);
