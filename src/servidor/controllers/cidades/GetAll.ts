@@ -34,6 +34,9 @@ export const getAll = async (req: Request<{}, {}, {}, IQueryProps>, res: Respons
   const result = await CidadesProvider.getAll(page, limit, filter, id);
   const count = await CidadesProvider.count(filter);
 
+
+  console.log('idUsuario', req.headers.idUsuario)
+
   if (result instanceof Error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: { default: result.message }

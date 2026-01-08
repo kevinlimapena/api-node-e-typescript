@@ -7,6 +7,7 @@ describe('Pessoas - GetAll', () => {
   let cidadeId: number | undefined = undefined;
   beforeAll(async () => {
     const resCidade = await testServer
+      .set('Authorization', 'Bearer teste.teste.teste')
       .post('/cidades')
       .send({ nome: 'Teste' });
 
